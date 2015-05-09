@@ -18,7 +18,7 @@ Configure scheduler.
 
 	# Run cmd.exe as Administrator.
 	# This will run once an hour, every hour.
-	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin64\backup-agent\run-invisible.vbs
+	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\backup-agent\run-invisible.vbs
 
 #### Linux Installation
 
