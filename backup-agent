@@ -1,21 +1,21 @@
 #!/bin/bash
 
-RSYNC_OPTS="--delete --progress --verbose -az -e 'ssh -p 2215'"
+RSYNC_OPTS="--delete --progress --verbose -az -e 'ssh -p 22'"
 
-USER=pi
-ADDRESS=192.168.1.154
-DEST_DIR=/mnt/BTSync/will
+USER=
+ADDRESS=
+
+# Full path on destination machine.
+DEST_DIR=
 
 DEST=$USER@$ADDRESS:$DEST_DIR
-
-SRC=$HOME/BTSync/will
 
 LOG=backup-agent.log
 
 function-run-backup()
 {
-	eval rsync $RSYNC_OPTS $SRC/Music $DEST/
-	eval rsync $RSYNC_OPTS $SRC/Pictures $DEST/
+	eval rsync $RSYNC_OPTS $HOME/BTSync/will/Music $DEST/
+	eval rsync $RSYNC_OPTS $HOME/BTSync/will/Pictures $DEST/
 	eval rsync --exclude ".encfs6.xml" $RSYNC_OPTS $HOME/BTSync/will/.crypt $DEST/
 }
 
