@@ -1,0 +1,10 @@
+install:
+	cp ./backup-agent /usr/local/bin/
+	chmod +x /usr/local/bin/backup-agent
+	./add-to-cron.sh
+
+uninstall:
+	rm -f /usr/local/bin/backup-agent
+	echo "Remove the crontab entry manually!!!"
+
+reinstall: uninstall install

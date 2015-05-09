@@ -1,0 +1,47 @@
+#!/bin/bash
+# /etc/init.d/backup-agent
+
+# Install   - (sudo cp backup-agent /etc/init.d && sudo update-rc.d backup-agent defaults)
+# Uninstall - (sudo update-rc.d -f backup-agent remove)
+
+### BEGIN INIT INFO
+# Provides:          backup-agent
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Daemon that handles file backup
+# Description:
+### END INIT INFO
+
+USER=wil
+
+USERID=`id -u ${USER} 2>/dev/null`
+GROUPID=`id -g ${USER} 2>/dev/null`
+
+echo $UID
+echo $GID
+
+if [ ${USERID}"X" != "X" -a ${GROUPID}"X" != "X" ] ; then
+	echo "Run as user $USER"
+	# exec env UID=${UID} GID=${GID} $@
+else
+	echo "invalid user"
+	exit 1
+fi
+
+
+case "$1" in
+  start)
+    exec env UID=${UID} GID=${GID} backup-agent &
+    ;;
+  stop)
+    killall -9 backup-agent
+    ;;
+  retart)
+    stop
+    start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|uninstall}"
+esac
