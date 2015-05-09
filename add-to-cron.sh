@@ -13,6 +13,8 @@ USER=will
 #fi
 
 #line="* * * * * exec env UID=${USERID} GID=${GROUPID} /path/to/command"
-line="* * * * * /usr/local/bin/backup-agent"
+
+# Every 0 minutes, every 1 hours, every month
+line="0 */1 * * * /usr/local/bin/backup-agent"
 
 crontab -u $USER -l | grep -q -F "$line" || (crontab -u $USER -l; echo "$line" ) | crontab -u $USER -

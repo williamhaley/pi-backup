@@ -2,15 +2,15 @@
 
 RSYNC_OPTS="--delete --progress --verbose -az -e 'ssh -p 22'"
 
-USER=
-ADDRESS=
+USER=pi
+ADDRESS=192.168.1.154
 DEST_DIR=/mnt/BTSync/will
 
 DEST=$USER@$ADDRESS:$DEST_DIR
 
 SRC=$HOME/BTSync/will
 
-FREQUENCY=10m
+LOG=/var/log/backup-agent.log
 
 function-run-backup()
 {
@@ -19,9 +19,6 @@ function-run-backup()
 	eval rsync --exclude ".encfs6.xml" $RSYNC_OPTS $HOME/BTSync/will/.crypt $DEST/
 }
 
-while [ true ]
-do
-	function-run-backup
+function-run-backup
 
-	sleep $FREQUENCY
-done
+date >> $LOG
