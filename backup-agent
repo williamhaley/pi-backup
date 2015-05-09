@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RSYNC_OPTS="--delete --progress --verbose -az -e 'ssh -p 22'"
+RSYNC_OPTS="--delete --progress --verbose -az -e 'ssh -p 2215'"
 
 USER=pi
 ADDRESS=192.168.1.154
@@ -10,7 +10,7 @@ DEST=$USER@$ADDRESS:$DEST_DIR
 
 SRC=$HOME/BTSync/will
 
-LOG=/var/log/backup-agent.log
+LOG=backup-agent.log
 
 function-run-backup()
 {
