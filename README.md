@@ -10,13 +10,17 @@ If I'm doing this myself, I should at least be consistent to make this system as
 
 ## Typical Setup
 
-Client -- (rsync + SSH) --> Local Network Raspberry Pi -- (rsync + SSH) --> Other Pis across the Internet.
+[Site A]
+Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
-The Pis all mount an encrypted partition on boot to `/bak`.  Clients should back up to the root of `/bak`.
+[Site B]
+Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
-`/bak/will` (for example).
+Site B syncs it's data to site A and vice versa so that backups are maintained off-site for each location.]
 
-It's up to the clients to ensure the data they're sending is in a state that is acceptable.  If you're worried about sending any data over the wire, use something like `encfs` before hand to make sure the files are in a state which which you are comfortable.
+The Pis all mount an encrypted partition on boot to `/bak`.  That is the destination to which clients should backup their data.
+
+It's up to the clients to ensure the data they're sending out in a state that is acceptable.  If you're worried about sending any data over the wire, use something like `encfs` before hand to make sure the files are in a state which which you are comfortable.
 
 ## Windows Client Installation
 
