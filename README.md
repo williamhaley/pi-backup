@@ -1,3 +1,23 @@
+# Pi Sync
+
+## What is this?
+
+I was using BTSync to keep my computer and my various family computers backed up to multiple Raspberry Pis.  This worked well for a while, but I encountered enough small nitpicky issues (sync directories that seemed to get stuck on certain files, read-only destinations keeping files that were deleted on the source, the upgrade to version 2.0 was jarring, conflict folders up the wazoo) that I decided to simplify (complicate) my backup solution.
+
+So I down(up?)graded my setup to use SSH and rsync.  Collected here are scripts and configuration files to try and make this experience consistent across all devices.
+
+If I'm doing this myself, I should at least be consistent to make this system as painless as possible.
+
+## Typical Setup
+
+Client -- (rsync + SSH) --> Local Network Raspberry Pi -- (rsync + SSH) --> Other Pis across the Internet.
+
+The Pis all mount an encrypted partition on boot to `/bak`.  Clients should back up to the root of `/bak`.
+
+`/bak/will` (for example).
+
+It's up to the clients to ensure the data they're sending is in a state that is acceptable.  If you're worried about sending any data over the wire, use something like `encfs` before hand to make sure the files are in a state which which you are comfortable.
+
 ## Windows Client Installation
 
 ### Dependencies
