@@ -18,7 +18,9 @@ Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
 Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
-Site B syncs it's data to site A and vice versa so that backups are maintained off-site for each location.
+[Site A <==> Site B]
+
+Raspberry Pis backup to one another so that backups exist on-site and off-site for each location.
 
 The Pis all mount an encrypted partition on boot to `/bak`.  That is the destination to which clients should backup their data.
 
