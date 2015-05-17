@@ -11,12 +11,14 @@ If I'm doing this myself, I should at least be consistent to make this system as
 ## Typical Setup
 
 [Site A]
+
 Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
 [Site B]
+
 Clients backup (rsync + SSH) to a Raspberry Pi on the local network.
 
-Site B syncs it's data to site A and vice versa so that backups are maintained off-site for each location.]
+Site B syncs it's data to site A and vice versa so that backups are maintained off-site for each location.
 
 The Pis all mount an encrypted partition on boot to `/bak`.  That is the destination to which clients should backup their data.
 
