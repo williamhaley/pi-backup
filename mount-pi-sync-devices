@@ -1,5 +1,4 @@
 #!/bin/bash
-# /etc/init.d/start-stack
 
 ### BEGIN INIT INFO
 # Provides:          start-stack
