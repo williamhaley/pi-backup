@@ -27,7 +27,6 @@ do
         cat $PRIVATE_KEY >> $COMBINED_KEY
 
         # luks partitions.
-
         cryptsetup luksOpen $DEVICE $DEVICE_NAME --key-file $COMBINED_KEY
 
         mount /dev/mapper/$DEVICE_NAME $MOUNT
@@ -36,7 +35,6 @@ do
 done
 
 # Cleanup.
-
 rm -f /tmp/encryption.key
 
 exit 0
