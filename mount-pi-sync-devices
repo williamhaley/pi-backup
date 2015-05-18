@@ -24,7 +24,6 @@ do
         wget -qO- $PUBLIC_KEY > $COMBINED_KEY
 
         # Combine public and private keys.
-
         cat $PRIVATE_KEY >> $COMBINED_KEY
 
         # luks partitions.
