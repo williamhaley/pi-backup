@@ -1,0 +1,43 @@
+#!/bin/bash
+# /etc/init.d/start-stack
+
+### BEGIN INIT INFO
+# Provides:          start-stack
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:
+### END INIT INFO
+
+PUBLIC_KEY=https://something.com/keyfile
+PRIVATE_KEY=/home/pi/private.key
+COMBINED_KEY=/tmp/encryption.key
+MOUNT=/mnt/BTSync
+DEVICE=/dev/sda
+DEVICE_NAME=ext_0
+
+while ! mountpoint -q "$MOUNT"
+do
+        # Download public key.
+        wget -qO- $PUBLIC_KEY > $COMBINED_KEY
+
+        # Combine public and private keys.
+
+        cat $PRIVATE_KEY >> $COMBINED_KEY
+
+        # luks partitions.
+
+        cryptsetup luksOpen $DEVICE $DEVICE_NAME --key-file $COMBINED_KEY
+
+        mount /dev/mapper/$DEVICE_NAME $MOUNT
+
+        sleep 2
+done
+
+# Cleanup.
+
+rm -f /tmp/encryption.key
+
+exit 0
