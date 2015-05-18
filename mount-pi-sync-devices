@@ -14,6 +14,9 @@
 PUBLIC_KEY=https://something.com/keyfile
 PRIVATE_KEY=/home/pi/private.key
 COMBINED_KEY=/tmp/encryption.key
+
+# !!! chmod $MOUNT 000 so that if someone tries to write to it before it's mounted, they'll get permission denied.
+
 MOUNT=/mnt/BTSync
 DEVICE=/dev/sda
 DEVICE_NAME=ext_0
