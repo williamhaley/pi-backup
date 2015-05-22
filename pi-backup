@@ -4,11 +4,11 @@ trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
 . config
 
-RSYNC_SSH="ssh -p $PORT"
+RSYNC_SSH="ssh -p $SSH_PORT"
 RSYNC_OPTS="--delete --progress --verbose -az"
 
 # Full path on destination machine.
-DEST_DIR=/bak/$DEST
+DEST_DIR=/bak/$BACKUP_NAME
 
 DEST=$USER@$ADDRESS:$DEST_DIR
 

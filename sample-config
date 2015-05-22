@@ -1,5 +1,5 @@
 USER=pi
 ADDRESS=somewhere.com
-PORT=22
-DEST=will
+SSH_PORT=22
+BACKUP_NAME=computer1backup
 DIRECTORIES=($HOME/Documents $HOME/Pictures)
