@@ -4,7 +4,16 @@
 
 A collection of scripts to standardize my backup process for various computers.
 
+## Dependencies
+
+* Cron (linux)
+* Cygwin (windows)
+* SSH
+* rsync
+
 ## Setup
+
+### Client
 
 Clone the repo.
 
@@ -16,29 +25,45 @@ Add your ssh-key to the remote server (First, generate keys with ssh-keygen if n
 	
 Make sure your `BACKUP_NAME` directory in the config is created in `/bak` on the backup server.
 
-#### Windows Installation
+#### Linux Backup Scheduling
 
+Configure cron.
+
+	# This will run once an hour, ever hour.
+	0 */1 * * * /path/to/pi-backup
+
+#### Windows Backup Scheduling
+
+Add your Cygwin bin path to PATH in Windows.
+
+	...;C:\cygwin\bin
+	
 Configure scheduler.
 
 	# Run cmd.exe as Administrator.
 	# This will run once an hour, every hour.
-	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\backup-agent\run-invisible.vbs
+	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\path\to\pi-backup\run-invisible.vbs
 
 You may also need to run this in Cygwin.
 
 	# 777 is rather liberal, but whatever.
 	chmod 777 run-invisible.vbs
 
-And add your Cygwin bin path to PATH in Windows.
+### Server
 
-	...;C:\cygwin\bin
+Try and make SSH a bit more secure.
 
-#### Linux Installation
+	# Non-standard port gives us some obscurity
+	Port 11111
+	PasswordAuthentication no
+	PermitRootLogin no
+	AllowUsers user1 user2
 
-Configure cron.
+Create backup directory at `/bak`.  You can make it a bit more secure by making permissions on `/bak` a bit restrictive and then explicitly creating the backup buckets under `/bak`.  This would prevent a misconfigured client from accidentally wiping out other backups.
 
-	# This will run once an hour, ever hour.
-	0 */1 * * * /path/to/pi-backup
+Use luks disk encryption for the drive where `/bak` is housed.
+
+Don't run an HTTP server or any other potential security risk on this server.  The less that's running, the less that can be compromised.
 
 ## Typical Architecture (ideally)
 
