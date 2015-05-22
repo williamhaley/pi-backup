@@ -14,7 +14,7 @@ Add your ssh-key to the remote server (First, generate keys with ssh-keygen if n
 
 	ssh-copy-id -p 22 user@address
 	
-Make sure your `DEST` directory in the config is created in `/bak` on the backup server.
+Make sure your `BACKUP_NAME` directory in the config is created in `/bak` on the backup server.
 
 #### Windows Installation
 
