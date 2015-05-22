@@ -13,6 +13,8 @@ A collection of scripts to standardize my backup process for various computers.
 
 ## Setup
 
+### Client
+
 Clone the repo.
 
 Create a `config` file.  See `sample-config` for an example.
@@ -46,6 +48,22 @@ You may also need to run this in Cygwin.
 And add your Cygwin bin path to PATH in Windows.
 
 	...;C:\cygwin\bin
+
+### Server
+
+Try and make SSH a bit more secure.
+
+	# Non-standard port gives us some obscurity
+	Port 11111
+	PasswordAuthentication no
+	PermitRootLogin no
+	AllowUsers user1 user2
+
+Create backup directory at `/bak`.  You can make it a bit more secure by making permissions on `/bak` a bit restrictive and then explicitly creating the backup buckets under `/bak`.  This would prevent a misconfigured client from accidentally wiping out other backups.
+
+Use luks disk encryption for the drive where `/bak` is housed.
+
+Don't run an HTTP server or any other potential security risk on this server.  The less that's running, the less that can be compromised.
 
 ## Typical Architecture (ideally)
 
