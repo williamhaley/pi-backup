@@ -42,12 +42,9 @@ Configure scheduler.
 
 	# Run cmd.exe as Administrator.
 	# This will run once an hour, every hour.
-	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\path\to\pi-backup\run-invisible.vbs
+	schtasks /create /tn "pi-backup" /SC Hourly /tr "C:\cygwin\bin\bash C:\path\to\pi-backup"
 
-You may also need to run this in Cygwin.
-
-	# 777 is rather liberal, but whatever.
-	chmod 777 run-invisible.vbs
+Mark the task as hidden and be sure to also check "Run task whether user is logged in or not".  That is the magic to making sure it runs hidden.
 
 ### Server
 
