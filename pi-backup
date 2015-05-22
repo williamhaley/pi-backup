@@ -2,7 +2,9 @@
 
 trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
-. config
+CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+. $CWD/config
 
 RSYNC_SSH="ssh -p $SSH_PORT"
 RSYNC_OPTS="--delete --progress --verbose -az"
