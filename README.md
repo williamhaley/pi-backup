@@ -4,6 +4,13 @@
 
 A collection of scripts to standardize my backup process for various computers.
 
+## Dependencies
+
+* Cron (linux)
+* Cygwin (windows)
+* SSH
+* rsync
+
 ## Setup
 
 Clone the repo.
@@ -16,13 +23,20 @@ Add your ssh-key to the remote server (First, generate keys with ssh-keygen if n
 	
 Make sure your `BACKUP_NAME` directory in the config is created in `/bak` on the backup server.
 
-#### Windows Installation
+#### Linux Backup Scheduling
+
+Configure cron.
+
+	# This will run once an hour, ever hour.
+	0 */1 * * * /path/to/pi-backup
+
+#### Windows Backup Scheduling
 
 Configure scheduler.
 
 	# Run cmd.exe as Administrator.
 	# This will run once an hour, every hour.
-	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\backup-agent\run-invisible.vbs
+	schtasks /create /tn "backup-agent" /SC Hourly /tr C:\cygwin\path\to\pi-backup\run-invisible.vbs
 
 You may also need to run this in Cygwin.
 
@@ -32,13 +46,6 @@ You may also need to run this in Cygwin.
 And add your Cygwin bin path to PATH in Windows.
 
 	...;C:\cygwin\bin
-
-#### Linux Installation
-
-Configure cron.
-
-	# This will run once an hour, ever hour.
-	0 */1 * * * /path/to/pi-backup
 
 ## Typical Architecture (ideally)
 
