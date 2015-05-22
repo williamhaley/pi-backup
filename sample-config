@@ -1,0 +1,5 @@
+USER=pi
+ADDRESS=somewhere.com
+PORT=22
+DEST=will
+DIRECTORIES=($HOME/Documents $HOME/Pictures)
