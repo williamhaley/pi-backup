@@ -34,6 +34,10 @@ Configure cron.
 
 #### Windows Backup Scheduling
 
+Add your Cygwin bin path to PATH in Windows.
+
+	...;C:\cygwin\bin
+	
 Configure scheduler.
 
 	# Run cmd.exe as Administrator.
@@ -44,10 +48,6 @@ You may also need to run this in Cygwin.
 
 	# 777 is rather liberal, but whatever.
 	chmod 777 run-invisible.vbs
-
-And add your Cygwin bin path to PATH in Windows.
-
-	...;C:\cygwin\bin
 
 ### Server
 
