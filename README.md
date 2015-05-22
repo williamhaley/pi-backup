@@ -40,7 +40,7 @@ Configure cron.
 	# This will run once an hour, ever hour.
 	0 */1 * * * /path/to/pi-backup
 
-## Typical Setup (ideally)
+## Typical Architecture (ideally)
 
 [Site A]
 
