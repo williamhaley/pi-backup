@@ -2,20 +2,17 @@
 
 trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
-RSYNC_SSH="ssh -p 22"
+. config
+
+RSYNC_SSH="ssh -p $PORT"
 RSYNC_OPTS="--delete --progress --verbose -az"
 
-USER=pi
-ADDRESS=
-
 # Full path on destination machine.
-DEST_DIR=/bak/will
+DEST_DIR=/bak/$DEST
 
 DEST=$USER@$ADDRESS:$DEST_DIR
 
 LOG=pi-backup.log
-
-DIRECTORIES=($HOME/Music $HOME/Pictures $HOME/Documents $HOME/secret)
 
 for directory in ${DIRECTORIES[@]}
 do
