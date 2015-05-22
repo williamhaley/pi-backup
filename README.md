@@ -59,6 +59,8 @@ Try and make SSH a bit more secure.
 	PermitRootLogin no
 	AllowUsers user1 user2
 
+Make sure you have all keys copied to the server *before* you deny password authentication.
+
 Create backup directory at `/bak`.  You can make it a bit more secure by making permissions on `/bak` a bit restrictive and then explicitly creating the backup buckets under `/bak`.  This would prevent a misconfigured client from accidentally wiping out other backups.
 
 Use luks disk encryption for the drive where `/bak` is housed.
