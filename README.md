@@ -1,4 +1,4 @@
-# Pi Sync
+# Pi Backup
 
 ## What is this?
 
