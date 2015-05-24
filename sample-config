@@ -7,4 +7,4 @@ BACKUP_NAME=computer1backup
 # Array of directories to backup.
 DIRECTORIES=($HOME/Documents $HOME/Pictures)
 # Limit bandwidth (Optional).
-BWLIMIT=1000
+# BWLIMIT=1000

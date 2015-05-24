@@ -2,9 +2,10 @@
 
 trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
-CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-. $CWD/config
+# Load configs.
+. $SCRIPT_DIR/config
 
 BWLIMIT_DEFAULT=5000
 BWLIMIT=${BWLIMIT:-$BWLIMIT_DEFAULT}
@@ -15,14 +16,20 @@ RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
 # Full path on destination machine.
 DEST_DIR=/bak/$BACKUP_NAME
 
+LOG=$SCRIPT_DIR/pi-backup.log
+
 DEST=$USER@$ADDRESS:$DEST_DIR
 
-LOG=pi-backup.log
+if (! ssh $USER@$ADDRESS "[ -d $DEST_DIR ]")
+then
+  echo "Backup destination does not exist. Abort."
+  exit 1
+fi
 
 for directory in ${DIRECTORIES[@]}
 do
-	# If one fails, abort.  Don't try the others.
+	# If one fails, abort.  Don't bother trying the others.
 	rsync $RSYNC_OPTS -e "$RSYNC_SSH" $directory $DEST/ || break
 done
 
-date >> $CWD/$LOG
+date >> $LOG
