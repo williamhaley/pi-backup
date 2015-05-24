@@ -6,8 +6,11 @@ CWD=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 . $CWD/config
 
+BWLIMIT_DEFAULT=5000
+BWLIMIT=${BWLIMIT:-$BWLIMIT_DEFAULT}
+
 RSYNC_SSH="ssh -p $SSH_PORT"
-RSYNC_OPTS="--delete --progress --verbose -az"
+RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
 
 # Full path on destination machine.
 DEST_DIR=/bak/$BACKUP_NAME
