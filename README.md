@@ -23,13 +23,13 @@ Add your ssh-key to the remote server (First, generate keys with ssh-keygen if n
 
 	ssh-copy-id -p 22 user@address
 	
-Make sure your `BACKUP_NAME` directory in the config is created in `/bak` on the backup server.
+Make sure your `BACKUP_NAME` directory in `config` exists in `/bak` on the backup server.
 
 #### Linux Backup Scheduling
 
 Configure cron.
 
-	# This will run once an hour, ever hour.
+	# This will run once an hour, every hour.
 	0 */1 * * * /path/to/pi-backup
 
 #### Windows Backup Scheduling
