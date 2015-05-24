@@ -22,4 +22,4 @@ do
 	rsync $RSYNC_OPTS -e "$RSYNC_SSH" $directory $DEST/ || break
 done
 
-date >> $LOG
+date >> $CWD/$LOG
