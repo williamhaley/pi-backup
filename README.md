@@ -42,7 +42,6 @@ Add your Cygwin bin path to PATH in Windows.
 	
 Configure scheduler.
 
-	# Run cmd.exe as Administrator.
 	# This will run once every hour on the hour.
 	schtasks /create /tn "pi-backup" /ST 00:00 /SC Hourly /tr "C:\cygwin\bin\bash C:\path\to\pi-backup"
 
