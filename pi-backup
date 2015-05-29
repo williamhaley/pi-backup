@@ -1,14 +1,21 @@
 #!/bin/bash
 
-trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
+# Default configs.
+
+SSH_USER=pi
+SSH_PORT=22
+BWLIMIT=5000
+BACKUP_NAME=$(hostname)
+
+# Load configs overrides.
 
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-# Load configs.
 . $SCRIPT_DIR/config
 
-BWLIMIT_DEFAULT=5000
-BWLIMIT=${BWLIMIT:-$BWLIMIT_DEFAULT}
+# Backup commands.
+
+trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
 RSYNC_SSH="ssh -p $SSH_PORT"
 RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
@@ -18,9 +25,9 @@ DEST_DIR=/bak/$BACKUP_NAME
 
 LOG=$SCRIPT_DIR/pi-backup.log
 
-DEST=$USER@$ADDRESS:$DEST_DIR
+DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 
-if (! ssh $USER@$ADDRESS "[ -d $DEST_DIR ]")
+if (! ssh -p $SSH_PORT $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
 then
   echo "Backup destination does not exist. Abort."
   exit 1
@@ -28,6 +35,8 @@ fi
 
 for directory in ${DIRECTORIES[@]}
 do
+	date >> $directory/.backup-tracker.log	
+
 	# If one fails, abort.  Don't bother trying the others.
 	rsync $RSYNC_OPTS -e "$RSYNC_SSH" $directory $DEST/ || break
 done

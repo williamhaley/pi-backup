@@ -1,10 +1,15 @@
-USER=pi
+# Required configs.
+
 # Backup server address.
 ADDRESS=somewhere.com
-SSH_PORT=22
 # Name of backup.
 BACKUP_NAME=computer1backup
 # Array of directories to backup.
 DIRECTORIES=($HOME/Documents $HOME/Pictures)
-# Limit bandwidth (Optional).
+
+# Optional configs.
+
+# SSH_USER=pi
+# SSH_PORT=22
 # BWLIMIT=1000
+
