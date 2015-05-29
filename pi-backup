@@ -4,6 +4,7 @@
 
 SSH_USER=pi
 SSH_PORT=22
+SSH_KEY=$HOME/.ssh/id_rsa
 BWLIMIT=5000
 BACKUP_NAME=$(hostname)
 
@@ -17,7 +18,7 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
-RSYNC_SSH="ssh -p $SSH_PORT"
+RSYNC_SSH="ssh -i $SSH_KEY -p $SSH_PORT"
 RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
 
 # Full path on destination machine.
@@ -27,7 +28,7 @@ LOG=$SCRIPT_DIR/pi-backup.log
 
 DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 
-if (! ssh -p $SSH_PORT $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
+if (! ssh -i $SSH_KEY -p $SSH_PORT $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
 then
   echo "Backup destination does not exist. Abort."
   exit 1

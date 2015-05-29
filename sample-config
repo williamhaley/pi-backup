@@ -11,5 +11,6 @@ DIRECTORIES=($HOME/Documents $HOME/Pictures)
 
 # SSH_USER=pi
 # SSH_PORT=22
+# SSH_KEY=$HOME/.ssh/id_rsa
 # BWLIMIT=1000
 
