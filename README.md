@@ -43,8 +43,8 @@ Add your Cygwin bin path to PATH in Windows.
 Configure scheduler.
 
 	# Run cmd.exe as Administrator.
-	# This will run once an hour, every hour.
-	schtasks /create /tn "pi-backup" /SC Hourly /tr "C:\cygwin\bin\bash C:\path\to\pi-backup"
+	# This will run once every hour on the hour.
+	schtasks /create /tn "pi-backup" /ST 00:00 /SC Hourly /tr "C:\cygwin\bin\bash C:\path\to\pi-backup"
 
 Mark the task as hidden and be sure to also check "Run task whether user is logged in or not".  That is the magic to making sure it runs hidden.
 
