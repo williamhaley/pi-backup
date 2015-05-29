@@ -31,8 +31,8 @@ Make sure your `BACKUP_NAME` directory in `config` exists in `/bak` on the backu
 
 Configure cron.
 
-	# This will run once an hour, every hour.
-	0 */1 * * * /path/to/pi-backup
+	# This will run once every hour on the hour.
+	0 * * * * /path/to/pi-backup
 
 #### Windows Backup Scheduling
 
