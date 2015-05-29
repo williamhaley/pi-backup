@@ -19,9 +19,11 @@ Clone the repo.
 
 Create a `config` file.  See `sample-config` for an example.
 
-Add your ssh-key to the remote server (First, generate keys with ssh-keygen if needed).
+If your SSH key requires a passphrase, then create a password-less key to be used by the automated script for backup.
 
-	ssh-copy-id -p 22 user@address
+	ssh-keygen -f $HOME/.ssh/pi-backup.rsa -t rsa -N ''
+
+Add your ssh-key to the remote server.
 	
 Make sure your `BACKUP_NAME` directory in `config` exists in `/bak` on the backup server.
 
@@ -29,8 +31,8 @@ Make sure your `BACKUP_NAME` directory in `config` exists in `/bak` on the backu
 
 Configure cron.
 
-	# This will run once an hour, every hour.
-	0 */1 * * * /path/to/pi-backup
+	# This will run once every hour on the hour.
+	0 * * * * /path/to/pi-backup
 
 #### Windows Backup Scheduling
 
