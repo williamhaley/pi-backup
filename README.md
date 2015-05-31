@@ -46,16 +46,12 @@ Create a `config` file.  See `sample-config` for an example.
 
 	cp sample-config config
 
-Create backup user.
-
-	useradd backup
-
 Create a password-less key to be used by the automated script for backup.
 
 	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
 	ssh-add $HOME/.ssh/pi_backup_rsa
 
-Add your ssh-key to the remote server.
+Add your ssh-key to the remote server's `authorized_keys` file.
 	
 Make sure your `BACKUP_NAME` directory in `config` exists in `/bak` on the backup server.
 
