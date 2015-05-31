@@ -13,6 +13,31 @@ A collection of scripts to standardize my backup process for various computers.
 
 ## Setup
 
+### Server
+
+Setup user account to handle backups.
+
+	sudo useradd -m -s /bin/bash pi-backup
+	sudo su pi-backup
+	mkdir .ssh
+	touch ~/.ssh/authorized_keys
+
+Try and make SSH a bit more secure.
+
+	# Non-standard port gives us some obscurity
+	Port 11111
+	PasswordAuthentication no
+	PermitRootLogin no
+	AllowUsers user1 user2 ... pi-backup
+
+Make sure you have all keys copied to the server *before* you deny password authentication.
+
+Create backup directory at `/bak`.  You can make it a bit more secure by making permissions on `/bak` a bit restrictive and then explicitly creating the backup buckets under `/bak`.  This would prevent a misconfigured client from accidentally wiping out other backups.
+
+Use luks disk encryption for the drive where `/bak` is housed.
+
+Don't run an HTTP server or any other potential security risk on this server.  The less that's running, the less that can be compromised.
+
 ### Client
 
 Clone the repo.
@@ -53,24 +78,6 @@ Configure scheduler.
 	schtasks /create /tn "pi-backup" /ST 00:00 /SC Hourly /tr "C:\cygwin\bin\bash C:\path\to\pi-backup"
 
 Mark the task as hidden and be sure to also check "Run task whether user is logged in or not".  That is the magic to making sure it runs hidden.
-
-### Server
-
-Try and make SSH a bit more secure.
-
-	# Non-standard port gives us some obscurity
-	Port 11111
-	PasswordAuthentication no
-	PermitRootLogin no
-	AllowUsers user1 user2
-
-Make sure you have all keys copied to the server *before* you deny password authentication.
-
-Create backup directory at `/bak`.  You can make it a bit more secure by making permissions on `/bak` a bit restrictive and then explicitly creating the backup buckets under `/bak`.  This would prevent a misconfigured client from accidentally wiping out other backups.
-
-Use luks disk encryption for the drive where `/bak` is housed.
-
-Don't run an HTTP server or any other potential security risk on this server.  The less that's running, the less that can be compromised.
 
 ## Typical Architecture (ideally)
 
