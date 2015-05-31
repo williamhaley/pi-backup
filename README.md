@@ -21,7 +21,7 @@ Create a `config` file.  See `sample-config` for an example.
 
 If your SSH key requires a passphrase, then create a password-less key to be used by the automated script for backup.
 
-	ssh-keygen -f $HOME/.ssh/pi-backup.rsa -t rsa -N ''
+	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
 
 Add your ssh-key to the remote server.
 	
