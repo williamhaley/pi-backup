@@ -19,9 +19,16 @@ Clone the repo.
 
 Create a `config` file.  See `sample-config` for an example.
 
-If your SSH key requires a passphrase, then create a password-less key to be used by the automated script for backup.
+	cp sample-config config
+
+Create backup user.
+
+	useradd backup
+
+Create a password-less key to be used by the automated script for backup.
 
 	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
+	sudo chown backup.backup $HOME/.ssh/pi_backup_rsa.*
 
 Add your ssh-key to the remote server.
 	
