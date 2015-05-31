@@ -2,9 +2,9 @@
 
 # Default configs.
 
-SSH_USER=pi
+SSH_USER=pi-backup
 SSH_PORT=22
-SSH_KEY=$HOME/.ssh/id_rsa
+SSH_KEY=$HOME/.ssh/pi_backup_rsa
 BWLIMIT=5000
 BACKUP_NAME=$(hostname)
 
@@ -18,7 +18,8 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
-RSYNC_SSH="ssh -i $SSH_KEY -p $SSH_PORT"
+SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
+
 RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
 
 # Full path on destination machine.
@@ -28,7 +29,7 @@ LOG=$SCRIPT_DIR/pi-backup.log
 
 DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 
-if (! ssh -i $SSH_KEY -p $SSH_PORT $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
+if (! $SSH_COMMAND $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
 then
   echo "Backup destination does not exist. Abort."
   exit 1
@@ -39,7 +40,7 @@ do
 	date >> $directory/.backup-tracker.log	
 
 	# If one fails, abort.  Don't bother trying the others.
-	rsync $RSYNC_OPTS -e "$RSYNC_SSH" $directory $DEST/ || break
+	rsync $RSYNC_OPTS -e "$SSH_COMMAND" $directory $DEST/ || break
 done
 
 date >> $LOG

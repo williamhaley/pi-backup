@@ -9,8 +9,8 @@ DIRECTORIES=($HOME/Documents $HOME/Pictures)
 
 # Optional configs.
 
-# SSH_USER=pi
+# SSH_USER=pi-backup
 # SSH_PORT=22
-# SSH_KEY=$HOME/.ssh/id_rsa
+# SSH_KEY=$HOME/.ssh/pi_backup_rsa
 # BWLIMIT=1000
 
