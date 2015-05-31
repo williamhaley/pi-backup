@@ -19,8 +19,8 @@ Setup user account to handle backups.
 
 	sudo useradd -m -s /bin/bash pi-backup
 	sudo su pi-backup
-	mkdir .ssh
-	touch ~/.ssh/authorized_keys
+	mkdir .ssh && chmod 700 .ssh
+	touch ~/.ssh/authorized_keys && chmod 700 ~/.ssh/authorized_keys
 
 Try and make SSH a bit more secure.
 
@@ -53,7 +53,7 @@ Create backup user.
 Create a password-less key to be used by the automated script for backup.
 
 	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
-	sudo chown backup.backup $HOME/.ssh/pi_backup_rsa.*
+	ssh-add $HOME/.ssh/pi_backup_rsa
 
 Add your ssh-key to the remote server.
 	
