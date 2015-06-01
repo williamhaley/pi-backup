@@ -42,14 +42,12 @@ Don't run an HTTP server or any other potential security risk on this server.  T
 
 Clone the repo.
 
-Create a `config` file.  See `sample-config` for an example.
+Install.
 
+	make install-client
 	cp sample-config config
 
-Create a password-less key to be used by the automated script for backup.
-
-	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
-	ssh-add $HOME/.ssh/pi_backup_rsa
+Update config file as needed.
 
 Add your ssh-key to the remote server's `authorized_keys` file.
 	
