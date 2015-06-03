@@ -44,7 +44,8 @@ Clone the repo.
 
 Install.
 
-	make install-client
+	ssh-keygen -f $HOME/.ssh/pi_backup_rsa -t rsa -N ''
+	ssh-add $HOME/.ssh/pi_backup_rsa
 	cp sample-config config
 
 Update config file as needed.
