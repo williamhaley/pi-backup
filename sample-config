@@ -4,6 +4,8 @@
 ADDRESS=somewhere.com
 # Name of backup.
 BACKUP_NAME=computer1backup
+# To replicate directories to another pi.
+# BACKUP_NAME=.
 # Array of directories to backup.
 DIRECTORIES=($HOME/Documents $HOME/Pictures)
 
