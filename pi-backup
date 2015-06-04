@@ -26,6 +26,16 @@ RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
 DEST_DIR=/bak/$BACKUP_NAME
 
 LOG=$SCRIPT_DIR/pi-backup.log
+PID=/tmp/pi-backup.pid
+
+# Exit early if pid file exists.
+if [ -f $PID ]
+then
+	echo "PID file exists. Abort."
+	exit 1
+fi
+
+touch $PID
 
 DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 
@@ -44,3 +54,5 @@ do
 done
 
 date >> $LOG
+
+rm $PID
