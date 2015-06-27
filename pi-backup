@@ -12,11 +12,7 @@ delete_pid_file()
 
 exit_if_pid_file_exists()
 {
-	if [ -f $PID ]
-	then
-		echo "PID file exists. Abort."
-		exit 1
-	fi
+	[ -f $PID ] && echo "PID file exists. Abort." && exit 1
 }
 
 # Default configs.
