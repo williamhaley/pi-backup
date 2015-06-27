@@ -52,6 +52,7 @@ DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 if (! $SSH_COMMAND $SSH_USER@$ADDRESS "[ -d $DEST_DIR ]")
 then
 	echo "Backup destination does not exist. Abort."
+	delete_pid_file
 	exit 1
 fi
 
