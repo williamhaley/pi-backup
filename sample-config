@@ -1,18 +1,27 @@
-# Required configs.
+## Required configs.
 
 # Backup server address.
 ADDRESS=somewhere.com
-# Name of backup.
-BACKUP_NAME=computer1backup
-# To replicate directories to another pi.
-# BACKUP_NAME=.
-# Array of directories to backup.
-DIRECTORIES=($HOME/Documents $HOME/Pictures)
 
-# Optional configs.
+# Name of backup/backup "bucket".
+BACKUP_NAME=computer1backup
+
+# To replicate one server to another pi.
+# BACKUP_NAME=.
+
+# Source dir.
+SOURCE=/home/user
+
+## Optional configs.
 
 # SSH_USER=pi-backup
 # SSH_PORT=22
 # SSH_KEY=$HOME/.ssh/pi_backup_rsa
 # BWLIMIT=1000
 
+# Copy only specific directories from the source.
+# INCLUDES=(--include="Documents" --include="Documents/**" --include="Pictures" --include="Pictures/**" --include="secret" --include="secret/**" --include="Music" --include="Music/**")
+# EXCLUDES=(--exclude="*")
+
+# Extra rsync opts.
+# EXTRA_OPTS="--delete --delete-excluded"

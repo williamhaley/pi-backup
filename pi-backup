@@ -20,7 +20,7 @@ trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
 
 SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
 
-RSYNC_OPTS="--delete --progress --verbose -az --bwlimit=$BWLIMIT"
+RSYNC_OPTS="--progress --verbose -az --bwlimit=$BWLIMIT"
 
 # Full path on destination machine.
 DEST_DIR=/bak/$BACKUP_NAME
@@ -45,13 +45,7 @@ then
 	exit 1
 fi
 
-for directory in ${DIRECTORIES[@]}
-do
-	date >> $directory/.backup-tracker.log	
-
-	# If one fails, abort.  Don't bother trying the others.
-	rsync $RSYNC_OPTS -e "$SSH_COMMAND" $directory $DEST/ || break
-done
+rsync $RSYNC_OPTS -e "$SSH_COMMAND" $EXTRA_OPTS ${INCLUDES[@]} ${EXCLUDES[@]} $SOURCE $DEST/
 
 date >> $LOG
 
