@@ -40,7 +40,7 @@ trap "echo Signal trap. Abort!; delete_pid_file; exit 1;" SIGINT SIGTERM
 
 SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
 
-RSYNC_OPTS="--progress --verbose -az --bwlimit=$BWLIMIT"
+RSYNC_OPTS="-az --bwlimit=$BWLIMIT"
 
 # Full path on destination machine.
 DEST_DIR=/bak/$BACKUP_NAME

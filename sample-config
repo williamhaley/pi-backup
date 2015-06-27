@@ -24,4 +24,4 @@ SOURCE=/home/user
 # EXCLUDES=(--exclude="*")
 
 # Extra rsync opts.
-# EXTRA_OPTS="--delete --delete-excluded"
+# EXTRA_OPTS="--delete --delete-excluded --progress --verbose"
