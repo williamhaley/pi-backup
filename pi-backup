@@ -36,12 +36,8 @@ trap "echo Signal trap. Abort!; delete_pid_file; exit 1;" SIGINT SIGTERM
 
 SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
 
-RSYNC_OPTS="-az --bwlimit=$BWLIMIT"
-
 # Full path on destination machine.
 DEST_DIR=/bak/$BACKUP_NAME
-
-LOG=$SCRIPT_DIR/pi-backup.log
 
 exit_if_pid_file_exists
 
@@ -56,9 +52,9 @@ then
 	exit 1
 fi
 
-rsync $RSYNC_OPTS -e "$SSH_COMMAND" $EXTRA_OPTS ${INCLUDES[@]} ${EXCLUDES[@]} $SOURCE $DEST/
+rsync -az --bwlimit=$BWLIMIT -e "$SSH_COMMAND" $EXTRA_OPTS ${INCLUDES[@]} ${EXCLUDES[@]} $SOURCE $DEST/
 
-date >> $LOG
+date >> $SCRIPT_DIR/pi-backup.log
 
 delete_pid_file
 
