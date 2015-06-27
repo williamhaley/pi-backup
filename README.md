@@ -35,7 +35,11 @@ Use rssh to allow scp but not an interactive login.
 	sudo apt-get install rssh
 	sudo usermod -s /usr/bin/rssh pi-backup
 
-Then uncomment `allowrsync` from `/etc/rssh.conf`.
+	cat << EOF > /etc/rssh.conf
+	logfacility = LOG_USER
+	allowrsync
+	umask = 022
+	EOF
 
 Make sure you have all keys copied to the server *before* you deny password authentication.
 
