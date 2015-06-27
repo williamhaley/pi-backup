@@ -1,5 +1,24 @@
 #!/bin/bash
 
+create_pid_file()
+{
+	touch $PID
+}
+
+delete_pid_file()
+{
+	rm $PID
+}
+
+exit_if_pid_file_exists()
+{
+	if [ -f $PID ]
+	then
+		echo "PID file exists. Abort."
+		exit 1
+	fi
+}
+
 # Default configs.
 
 SSH_USER=pi-backup
@@ -7,6 +26,7 @@ SSH_PORT=22
 SSH_KEY=$HOME/.ssh/pi_backup_rsa
 BWLIMIT=5000
 BACKUP_NAME=$(hostname)
+PID=/tmp/pi-backup.pid
 
 # Load configs overrides.
 
@@ -16,7 +36,7 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # Backup commands.
 
-trap "echo Signal trap. Abort!; exit 1;" SIGINT SIGTERM
+trap "echo Signal trap. Abort!; delete_pid_file; exit 1;" SIGINT SIGTERM
 
 SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
 
@@ -26,16 +46,10 @@ RSYNC_OPTS="--progress --verbose -az --bwlimit=$BWLIMIT"
 DEST_DIR=/bak/$BACKUP_NAME
 
 LOG=$SCRIPT_DIR/pi-backup.log
-PID=/tmp/pi-backup.pid
 
-# Exit early if pid file exists.
-if [ -f $PID ]
-then
-	echo "PID file exists. Abort."
-	exit 1
-fi
+exit_if_pid_file_exists
 
-touch $PID
+create_pid_file
 
 DEST=$SSH_USER@$ADDRESS:$DEST_DIR
 
@@ -49,4 +63,5 @@ rsync $RSYNC_OPTS -e "$SSH_COMMAND" $EXTRA_OPTS ${INCLUDES[@]} ${EXCLUDES[@]} $S
 
 date >> $LOG
 
-rm $PID
+delete_pid_file
+
