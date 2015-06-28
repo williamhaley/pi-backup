@@ -28,7 +28,10 @@ Try and make SSH a bit more secure.
 	Port 11111
 	PasswordAuthentication no
 	PermitRootLogin no
-	AllowUsers user1 user2 ... pi-backup
+	AllowUsers user1 user2 pi-backup
+	# Kick users out if idle for 30 seconds.
+	ClientAliveInterval 30
+	ClientAliveCountMax 0
 
 Use rssh to allow scp but not an interactive login.
 
