@@ -1,45 +1,40 @@
 #!/bin/bash
 
-create_pid_file()
-{
-	touch $PID
-}
-
-delete_pid_file()
-{
-	rm $PID
-}
-
-exit_if_pid_file_exists()
-{
-	[ -f $PID ] && echo "PID file exists. Abort." && exit 1
-}
-
-SSH_PORT=22
-BWLIMIT=5000
-PID=/tmp/pi-backup.pid
-
 WORKING_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
-# Load configs.
-source $WORKING_DIR/backup-client.conf
+SCRIPT_NAME=`basename "$0"`
+SSH_PORT=22
+BWLIMIT=5000
+PID=/tmp/$SCRIPT_NAME.pid
+source $WORKING_DIR/$SCRIPT_NAME.conf
 
-trap "echo Signal trap. Abort!; delete_pid_file; exit 1;" SIGINT SIGTERM
+trap "echo Signal trap. Abort!; rm $PID; exit 1;" SIGINT SIGTERM
 
-SSH_COMMAND="ssh -i $SSH_KEY -p $SSH_PORT"
+# Exit early if PID file exists already
+[ -f $PID ] && echo "PID file exists. Abort." && exit 1
 
-# Full path on destination machine.
-DEST_DIR=/mnt/$BACKUP_NAME
+INCLUDES=$WORKING_DIR/.includes.conf
+rm -f $INCLUDES
+for DIR in "${DIRECTORIES[@]}"
+do
+	echo "$DIR"    >> $INCLUDES
+	echo "$DIR/**" >> $INCLUDES
+done
 
-exit_if_pid_file_exists
+touch $PID
 
-create_pid_file
+rsync \
+	-az \
+	--bwlimit=$BWLIMIT \
+	-e "ssh -i $SSH_KEY -p $SSH_PORT" \
+	--delete \
+	--delete-excluded \
+	$EXTRA_OPTS \
+	--exclude-from="$WORKING_DIR/global-excludes.conf" \
+	--include-from="$INCLUDES" \
+	--exclude="*" \
+	$SOURCE \
+	$BACKUP_USER@$ADDRESS:/mnt/
 
-DEST=$BACKUP_USER@$ADDRESS:$DEST_DIR
-
-set -x
-
-rsync -az --bwlimit=$BWLIMIT -e "$SSH_COMMAND" --delete --delete-excluded $EXTRA_OPTS ${INCLUDES[@]} ${EXCLUDES[@]} $SOURCE $DEST/
-
-delete_pid_file
+rm $PID
 
