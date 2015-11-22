@@ -1,0 +1,2 @@
+storage1        /dev/mapper/STORAGE1-storage1   /mnt/key/mykey.keyfile  nofail
+

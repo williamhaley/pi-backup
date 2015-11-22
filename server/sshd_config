@@ -1,0 +1,7 @@
+AllowGroups backupusers
+
+Match Group backupusers
+        ChrootDirectory         /var/backup-jails/%u
+        X11Forwarding           no
+        AllowTcpForwarding      no
+        AuthorizedKeysFile      /etc/ssh/authorized_keys
