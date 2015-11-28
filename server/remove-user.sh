@@ -7,10 +7,7 @@ BACKUP_NAME=$1
 [[ -z "${BACKUP_NAME// }" ]] && echo "Pass name of backup. (e.g. will_backup_user)" && exit 1
 
 read -r -p "Are you sure? All data will be deleted. [Type YES to proceed] " response
-if [[ "$response" != "YES" ]]
-then
-	exit 1    
-fi
+[[ "$response" != "YES" ]] && exit 1
 
 userdel $BACKUP_NAME
 
