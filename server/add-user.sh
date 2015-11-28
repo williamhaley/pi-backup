@@ -8,7 +8,7 @@ BACKUP_NAME=$1
 
 useradd --no-create-home --home-dir /tmp -s /bin/bash -G backupusers $BACKUP_NAME
 
-wget https://raw.githubusercontent.com/williamhaley/configs/master/create-jail.sh -P /tmp/
+wget https://raw.githubusercontent.com/williamhaley/configs/master/create-jail.sh -O /tmp/create-jail.sh
 
 PATH_TO_JAIL=/mnt/storage1/backup-jail/$BACKUP_NAME
 
