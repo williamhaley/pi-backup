@@ -1,3 +1,4 @@
 /dev/mapper/storage1				/mnt/storage1	ext4	defaults,nofail,x-systemd.device-timeout=1
 UUID=1ed7fee7-0ea5-4643-bb0c-a4937da77a3f	/mnt/key	ext4	defaults,nofail,x-systemd.device-timeout=1
 
+/mnt/storage1/backup-jails			/jails		none	bind,nofail

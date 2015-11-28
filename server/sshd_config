@@ -1,7 +1,28 @@
+PermitRootLogin			no
+
+UsePAM				yes
+PrintMotd			no
+
+ClientAliveInterval		30
+ClientAliveCountMax		0
+
+AuthorizedKeysFile		/home/%u/.ssh/authorized_keys
+
+ChallengeResponseAuthentication	no
+PasswordAuthentication		no
+PermitEmptyPasswords		no
+
+UsePrivilegeSeparation		sandbox
+StrictModes			yes
+
+Subsystem			sftp	internal-sftp
+
+AllowGroups sshusers
+
 AllowGroups backupusers
 
 Match Group backupusers
-        ChrootDirectory         /var/backup-jails/%u
+        ChrootDirectory         /jails/%u
         X11Forwarding           no
         AllowTcpForwarding      no
         AuthorizedKeysFile      /etc/ssh/authorized_keys
