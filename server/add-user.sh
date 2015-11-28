@@ -8,7 +8,7 @@ BACKUP_NAME=$1
 
 useradd --no-create-home --home-dir /tmp -s /bin/bash -G backupusers $BACKUP_NAME
 
-PATH_TO_JAIL=/mnt/storage1/backup-jail/$BACKUP_NAME
+PATH_TO_JAIL=/jails/$BACKUP_NAME
 
 WORKING_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 

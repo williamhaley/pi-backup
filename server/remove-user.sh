@@ -11,7 +11,7 @@ read -r -p "Are you sure? All data will be deleted. [Type YES to proceed] " resp
 
 userdel $BACKUP_NAME
 
-PATH_TO_JAIL=/mnt/storage1/backup-jail/$BACKUP_NAME
+PATH_TO_JAIL=/jails/$BACKUP_NAME
 
 rm -r $PATH_TO_JAIL
 
