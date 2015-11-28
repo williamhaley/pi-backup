@@ -4,7 +4,7 @@
 
 BACKUP_NAME=$1
 
-[[ -z "${BACKUP_NAME// }" ]] && echo "Pass name of backup. (e.g. will_backup_user)" && exit 1
+[[ ! "$BACKUP_NAME" =~ ^[a-zA-Z0-9]+$ ]] && echo "Pass name of backup. (e.g. will_backup_user)" && exit 1
 
 useradd --no-create-home --home-dir /tmp -s /bin/bash -G backupusers $BACKUP_NAME
 
