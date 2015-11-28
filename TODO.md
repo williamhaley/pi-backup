@@ -6,5 +6,5 @@ Make sure you install rsync (of course)
 
 mkdir /jails
 /jails/%u #sshd_config
-/mnt/storage1/backup-jail                       /jails          none    bind,nofail
+/mnt/storage1/backup-jails                       /jails          none    bind,nofail
 
