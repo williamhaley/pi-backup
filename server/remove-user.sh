@@ -4,7 +4,9 @@
 
 BACKUP_NAME=$1
 
-[[ ! "$BACKUP_NAME" =~ ^[a-zA-Z0-9]+$ ]] && echo "Pass name of backup. (e.g. will_backup_user)" && exit 1
+[[ ! "$BACKUP_NAME" =~ ^[a-zA-Z0-9]+$ ]] && echo "Pass name of backup. (a-Z0-9 e.g. willBackup01)" && exit 1
+
+exit 1
 
 read -r -p "Are you sure? All data will be deleted. [Type YES to proceed] " response
 [[ "$response" != "YES" ]] && exit 1
