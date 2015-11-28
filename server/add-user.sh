@@ -8,11 +8,11 @@ BACKUP_NAME=$1
 
 useradd --no-create-home --home-dir /tmp -s /bin/bash -G backupusers $BACKUP_NAME
 
-wget https://raw.githubusercontent.com/williamhaley/configs/master/create-jail.sh -O /tmp/create-jail.sh
-
 PATH_TO_JAIL=/mnt/storage1/backup-jail/$BACKUP_NAME
 
-bash /tmp/create-jail.sh $PATH_TO_JAIL
+WORKING_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+bash $WORKING_DIR/create-jail.sh $PATH_TO_JAIL
 chmod 775 $PATH_TO_JAIL/mnt
 chown $BACKUP_NAME:$BACKUP_NAME $PATH_TO_JAIL/mnt
 chown $BACKUP_NAME:$BACKUP_NAME $PATH_TO_JAIL/tmp
