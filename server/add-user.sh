@@ -15,6 +15,7 @@ PATH_TO_JAIL=/mnt/storage1/backup-jail/$BACKUP_NAME
 bash /tmp/create-jail.sh $PATH_TO_JAIL
 chmod 775 $PATH_TO_JAIL/mnt
 chown $BACKUP_NAME:$BACKUP_NAME $PATH_TO_JAIL/mnt
+chown $BACKUP_NAME:$BACKUP_NAME $PATH_TO_JAIL/tmp
 
 ssh-keygen -f $PATH_TO_JAIL/etc/$BACKUP_NAME-SSH -t rsa -N ''
 
