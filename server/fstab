@@ -1,5 +1,5 @@
-/dev/mapper/storage1				/mnt/storage1	ext4	noauto,nofail,x-systemd.automount,x-systemd.device-timeout=5
-/dev/mapper/external1				/mnt/external1	ext4	noauto,nofail,x-systemd.automount,x-systemd.device-timeout=5
+/dev/mapper/storage1				/mnt/storage1	ext4	defaults,auto,nofail,x-systemd.automount,x-systemd.device-timeout=1
+/dev/mapper/external1				/mnt/external1	ext4	defaults,auto,nofail,x-systemd.automount,x-systemd.device-timeout=1
 
 UUID=1ed7fee7-0ea5-4643-bb0c-a4937da77a3f	/mnt/key	ext4	defaults,nofail,x-systemd.device-timeout=1
 
