@@ -14,11 +14,7 @@ setup-x86.exe ^
 --local-package-dir "%PROGRAMFILES%\cygwin-packages" ^
 --verbose ^
 --prune-install ^
---packages ^
-openssh ^
-git ^
-rsync ^
-nano
+--packages openssh,git,rsync,nano
 
 setx path "%PATH%;%PROGRAMFILES%\cygwin\bin"
 
