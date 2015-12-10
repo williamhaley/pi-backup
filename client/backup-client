@@ -6,12 +6,16 @@ SCRIPT_NAME=`basename "$0"`
 SSH_PORT=22
 BWLIMIT=5000
 PID=/tmp/$SCRIPT_NAME.pid
+
+# TODO WFH Check current dir first, then /etc. Or other way around? Or only etc?
 source $WORKING_DIR/$SCRIPT_NAME.conf
 
 trap "echo Signal trap. Abort!; rm $PID; exit 1;" SIGINT SIGTERM
 
 # Exit early if PID file exists already
 [ -f $PID ] && echo "PID file exists. Abort." && exit 1
+
+# TODO WFH Put includes in /tmp/ with random name.
 
 INCLUDES=$WORKING_DIR/.includes.conf
 rm -f $INCLUDES

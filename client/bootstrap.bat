@@ -1,3 +1,5 @@
+mkdir "%PROGRAMFILES%\pbackup"
+
 REM Powershell 2
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://cygwin.com/setup-x86.exe', 'setup-x86.exe')"
 
@@ -9,13 +11,13 @@ setup-x86.exe ^
 --no-shortcuts ^
 --no-desktop ^
 --quiet-mode ^
---root "%PROGRAMFILES%\cygwin" ^
+--root "%PROGRAMFILES%\pbackup\cygwin" ^
 --arch x86 ^
---local-package-dir "%PROGRAMFILES%\cygwin-packages" ^
+--local-package-dir "%PROGRAMFILES%\pbackup\cygwin-packages" ^
 --verbose ^
 --prune-install ^
 --packages openssh,git,rsync,nano
 
-setx path "%PATH%;%PROGRAMFILES%\cygwin\bin"
+setx path "%PATH%;%PROGRAMFILES%\pbackup\cygwin\bin"
 
 del setup-x86.exe
